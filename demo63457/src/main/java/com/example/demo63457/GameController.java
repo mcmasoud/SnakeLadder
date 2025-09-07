@@ -68,8 +68,14 @@ class GameController {
     }
 
     private Player findPlayerByName(String name) {
-        return engine.getPlayers().stream().filter(p -> p.getName().equals(name)).findFirst().orElseThrow();
+    for (Player p : engine.getPlayers()) {
+        if (p.getName().equals(name)) {
+            return p;
+        }
     }
+    throw new RuntimeException("Player not found: " + name);
+}
+
 
     private void initTokens() {
         for (Player p : engine.getPlayers()) {
@@ -102,4 +108,5 @@ class GameController {
     }
 
 }
+
 
